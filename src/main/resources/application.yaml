@@ -1,0 +1,76 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://courseproject.cvocifm5pfxr.us-east-1.rds.amazonaws.com:5432/postgres
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 517447956930-ig2aufpe5329cdajidlh1sv6m9k6epec.apps.googleusercontent.com
+            clientSecret: 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
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+          facebook:
+            clientId: 121189305185277
+            clientSecret: 42ffe5aa7379e8326387e0fe16f34132
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - public_profile
+          github:
+            clientId: 24f2fd3ffd314a4a4f8b
+            clientSecret: a1eed031e8d309e1cece0ec36f5aa0f56e7b1c97
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - user:email
+              - read:user
+        provider:
+          facebook:
+            authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
+            tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
+            userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+app:
+  auth:
+    tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
+    tokenExpirationMsec: 864000000
+  cors:
+    allowedOrigins: http://localhost:3000,http://localhost:8080
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth2/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
+
+jwt:
+  access:
+    secret:
+      key: mysupersecretkey_w243t5@dvbsWEF#aegLNUGPn$dfvrom%fbwr4330$rfsvmaetr>
+    expiration:
+      time: 6000000
+
+firebase:
+  bucket:
+    name: collectin-3959d.appspot.com
+  image:
+    url: https://firebasestorage.googleapis.com/v0/b/${firebase.bucket.name}/o/%s?alt=media
+  project:
+    id: collectin-3959d
+
+springdoc:
+  swagger-ui:
+    path: swagger-ui
+  api-docs:
+    path: /api-docs
